@@ -1,4 +1,13 @@
+import { useState } from "react";
+import { auth } from "./firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
+const [email,setEmail] = useState("")
+const [password,setPassword] = useState("");
+
+const signIn =async () => {
+  await createUserWithEmailAndPassword(auth,email,password);
+}
 
 function Login() {
     return (
@@ -11,6 +20,7 @@ function Login() {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 placeholder="Username"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="mb-6">
@@ -18,6 +28,7 @@ function Login() {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="password"
                 placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
